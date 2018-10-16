@@ -21,7 +21,7 @@
                         </td>
                         <td>
                             <button class="btn btn-xs btn-primary" v-if="!project.status" @click="markAsComplete(project.id)">Mark As Complete</button>
-                            <button class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button>
+                            <span class="lead" v-else> No Action for this proceject</span>
                         </td>
                     </tr>
                 </tbody>
@@ -53,6 +53,7 @@
             {
                 axios.get('/updateDuration')
                     .then((response)=>{
+                    this.get_projects()
                                                 swal(
                         'Updated',
                         response.data.message,
@@ -70,6 +71,7 @@
                     'Updated',
                     response.data.message,
                             'success')
+                        this.get_projects()
                     })
                     .catch((error)=>{
                             console.log(error)
